@@ -1,17 +1,49 @@
+gnore
+# Credenciais
 .env
 chave_web.txt
+
+# Ambiente virtual
 .venv/
+
+# Cache Python
 __pycache__/
 *.pyc
+*.pyo
 
+# Dados gerados
 dados/transcricoes/*
 dados/relatorios/*
 dados/resumos/*
 dados/pendencias/*
 
+# Manter a estrutura dos diretórios
 !dados/transcricoes/.gitkeep
 !dados/relatorios/.gitkeep
 !dados/resumos/.gitkeep
 !dados/pendencias/.gitkeep
 
+# Modelos de reconhecimento
 modelos/
+
+# Whisper.cpp e arquivos compilados
+ferramentas/whisper.cpp/
+
+# Gravações e áudios de teste
+*.wav
+*.mp3
+*.ogg
+*.webm
+
+# Certificados HTTPS e chaves privadas
+certificados/
+*.key
+*-key.pem
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# Editores
+.vscode/
+.idea/

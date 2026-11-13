@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sistema de acessibilidade educacional com legendas em tempo real."
+    >
+
+    <title>Agente IHC | Acessibilidade Educacional</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ======================================
+         CABEÇALHO
+    ======================================= -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon" aria-hidden="true">
+                A
+            </div>
+
+            <div>
+
+                <h1>Agente IHC</h1>
+
+                <p>Acessibilidade Educacional</p>
+
+            </div>
+
+        </div>
+
+        <div
+            id="connection-status"
+            class="connection-status disconnected"
+            role="status"
+        >
+
+            <span class="status-dot"></span>
+
+            <span id="connection-text">
+                Desconectado
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- ======================================
+         CONTEÚDO PRINCIPAL
+    ======================================= -->
+
+    <main class="container">
+
+        <!-- Informações da aula -->
+
+        <section
+            class="lesson-info"
+            aria-labelledby="lesson-title"
+        >
+
+            <div class="lesson-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        AULA ATUAL
+                    </span>
+
+                    <h2 id="lesson-title">
+                        Aguardando início da aula
+                    </h2>
+
+                    <p id="lesson-subtitle">
+                        O professor ainda não iniciou a sessão.
+                    </p>
+
+                </div>
+
+                <span
+                    id="lesson-status"
+                    class="lesson-status waiting"
+                    role="status"
+                >
+                    Aguardando
+                </span>
+
+            </div>
+
+            <div class="lesson-details">
+
+                <div class="detail">
+
+                    <span class="detail-label">
+                        Professor
+                    </span>
+
+                    <strong id="professor">
+                        Não informado
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span class="detail-label">
+                        Disciplina
+                    </span>
+
+                    <strong id="discipline">
+                        Não informada
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span class="detail-label">
+                        Tempo de aula
+                    </span>
+
+                    <strong id="lesson-timer">
+                        00:00:00
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             CONTROLES DE ACESSIBILIDADE
+        =================================== -->
+
+        <section
+            class="accessibility-panel"
+            aria-labelledby="accessibility-title"
+        >
+
+            <h2 id="accessibility-title">
+                Acessibilidade
+            </h2>
+
+            <div class="controls">
+
+                <div class="font-controls">
+
+                    <span>Tamanho do texto</span>
+
+                    <button
+                        id="font-decrease"
+                        type="button"
+                        aria-label="Diminuir tamanho das legendas"
+                    >
+                        A−
+                    </button>
+
+                    <span id="font-size">
+                        28px
+                    </span>
+
+                    <button
+                        id="font-increase"
+                        type="button"
+                        aria-label="Aumentar tamanho das legendas"
+                    >
+                        A+
+                    </button>
+
+                </div>
+
+                <button
+                    id="contrast-toggle"
+                    class="control-button"
+                    type="button"
+                    aria-pressed="false"
+                >
+                    Alto contraste
+                </button>
+
+                <button
+                    id="fullscreen-toggle"
+                    class="control-button"
+                    type="button"
+                    aria-pressed="false"
+                >
+                    Tela cheia
+                </button>
+
+                <button
+                    id="pause-toggle"
+                    class="control-button"
+                    type="button"
+                    aria-pressed="false"
+                >
+                    Pausar rolagem
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             LEGENDA ATUAL
+        =================================== -->
+
+        <section
+            class="caption-panel"
+            aria-labelledby="caption-title"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        TRANSMISSÃO AO VIVO
+                    </span>
+
+                    <h2 id="caption-title">
+                        Legenda atual
+                    </h2>
+
+                </div>
+
+                <span class="live-indicator">
+
+                    <span class="live-dot"></span>
+
+                    <span id="live-text">
+                        Aguardando áudio
+                    </span>
+
+                </span>
+
+            </div>
+
+            <div
+                id="current-caption"
+                class="current-caption"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+            >
+                As legendas aparecerão aqui quando
+                o professor começar a falar.
+            </div>
+
+            <div class="caption-footer">
+
+                <span id="caption-time">
+                    Nenhuma transcrição recebida
+                </span>
+
+                <span id="caption-type">
+                    Aguardando
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             AVISOS IMPORTANTES
+        =================================== -->
+
+        <section
+            id="important-panel"
+            class="important-panel"
+            aria-labelledby="important-title"
+            hidden
+        >
+
+            <h2 id="important-title">
+                Informações importantes
+            </h2>
+
+            <div id="important-content"></div>
+
+        </section>
+
+
+        <!-- ==================================
+             HISTÓRICO DE LEGENDAS
+        =================================== -->
+
+        <section
+            class="history-panel"
+            aria-labelledby="history-title"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2 id="history-title">
+                        Histórico da aula
+                    </h2>
+
+                    <p>
+                        Acompanhe as transcrições anteriores.
+                    </p>
+
+                </div>
+
+                <button
+                    id="clear-history"
+                    class="control-button"
+                    type="button"
+                >
+                    Limpar visualização
+                </button>
+
+            </div>
+
+            <div class="history-filters">
+
+                <button
+                    class="filter active"
+                    data-filter="todos"
+                    aria-pressed="true"
+                    type="button"
+                >
+                    Todos
+                </button>
+
+                <button
+                    class="filter"
+                    data-filter="conteudo"
+                    aria-pressed="false"
+                    type="button"
+                >
+                    Conteúdo
+                </button>
+
+                <button
+                    class="filter"
+                    data-filter="atividade"
+                    aria-pressed="false"
+                    type="button"
+                >
+                    Atividades
+                </button>
+
+                <button
+                    class="filter"
+                    data-filter="trabalho"
+                    aria-pressed="false"
+                    type="button"
+                >
+                    Trabalhos
+                </button>
+
+                <button
+                    class="filter"
+                    data-filter="importante"
+                    aria-pressed="false"
+                    type="button"
+                >
+                    Importantes
+                </button>
+
+            </div>
+
+            <div
+                id="history"
+                class="history"
+                tabindex="0"
+                aria-label="Histórico das transcrições"
+            >
+
+                <p id="empty-history" class="empty-message">
+
+                    Nenhuma transcrição disponível.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             PROCESSAMENTO FINAL
+        =================================== -->
+
+        <section
+            id="processing-panel"
+            class="processing-panel"
+            aria-labelledby="processing-title"
+            hidden
+        >
+
+            <div
+                id="processing-icon"
+                class="processing-icon"
+                aria-hidden="true"
+            >
+                ...
+            </div>
+
+            <div role="status">
+
+                <h2 id="processing-title">
+                    Preparando material de estudo
+                </h2>
+
+                <p id="processing-message">
+
+                    A aula foi finalizada.
+                    O agente está organizando o conteúdo.
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ======================================
+         RODAPÉ
+    ======================================= -->
+
+    <footer class="footer">
+
+        <p>
+            Agente de Acessibilidade Educacional
+        </p>
+
+        <p>
+            IFPR — Interação Humano-Computador
+        </p>
+
+        <p>
+            Grupo 4
+        </p>
+
+    </footer>
+
+</body>

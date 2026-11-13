@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0c1220"
+    >
+
+    <title>Agente IHC | Professor</title>
+
+    <style>
+
+        :root {
+            color-scheme: dark;
+            --fundo: #0c1220;
+            --card: #152036;
+            --borda: #293b55;
+            --texto: #f1f5f9;
+            --secundario: #94a3b8;
+            --azul: #2563eb;
+            --verde: #15803d;
+            --vermelho: #b91c1c;
+            --roxo: #7e22ce;
+            --amarelo: #a16207;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--fundo);
+            color: var(--texto);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: #111b30;
+            padding: 24px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 26px;
+        }
+
+        header p {
+            margin: 0;
+            color: var(--secundario);
+        }
+
+        main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 21px;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--borda);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(145px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .status-grid .card {
+            margin: 0;
+        }
+
+        .status-grid small {
+            display: block;
+            color: var(--secundario);
+            margin-bottom: 10px;
+        }
+
+        .status-grid strong {
+            font-size: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 8px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            background: #0b1425;
+            border: 1px solid #354661;
+            border-radius: 8px;
+            padding: 14px;
+            color: white;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        button {
+            border: 0;
+            border-radius: 9px;
+            background: var(--azul);
+            color: white;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 3px;
+        }
+
+        .verde {
+            background: var(--verde);
+        }
+
+        .vermelho {
+            background: var(--vermelho);
+        }
+
+        .roxo {
+            background: var(--roxo);
+        }
+
+        .amarelo {
+            background: var(--amarelo);
+        }
+
+        .cinza {
+            background: #334155;
+        }
+
+        .botoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .mensagem {
+            color: var(--secundario);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .fonte {
+            background: #0d1729;
+            border: 1px solid #30415d;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .fonte.ativa {
+            border-color: #22c55e;
+        }
+
+        .indicador {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            margin-right: 6px;
+            background: #64748b;
+        }
+
+        .indicador.ativo {
+            background: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
+        .legenda {
+            min-height: 150px;
+            background: #0a1222;
+            border-radius: 10px;
+            padding: 24px;
+            font-size: 25px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .parcial {
+            color: #94a3b8;
+            font-style: italic;
+            margin-top: 14px;
+            font-size: 20px;
+        }
+
+        .historico {
+            max-height: 350px;
+            overflow-y: auto;
+            background: #0a1222;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .registro {
+            padding: 14px 10px;
+            border-bottom: 1px solid var(--borda);
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .registro small {
+            display: block;
+            margin-bottom: 6px;
+            color: #93c5fd;
+        }
+
+        .registro.importante {
+            background: #29230e;
+            border-left: 4px solid #facc15;
+        }
+
+        .feedback {
+            background: #0b1425;
+            padding: 16px;
+            min-height: 50px;
+            border-radius: 9px;
+            color: #86efac;
+            line-height: 1.6;
+        }
+
+        .erro {
+            color: #fca5a5;
+        }
+
+        .telemetria {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .telemetria div {
+            padding: 10px;
+            background: #0a1222;
+            border-radius: 6px;
+        }
+
+        .medidor {
+            background: #26334a;
+            height: 12px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        #nivelAudio {
+            height: 100%;
+            width: 0;
+            background: #22c55e;
+            transition: width .08s linear;
+        }
+
+        #processamento {
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 24px;
+            text-align: center;
+            color: var(--secundario);
+            font-size: 13px;
+        }
+
+        hr {
+            margin: 24px 0;
+            border: 0;
+            border-top: 1px solid var(--borda);
+        }
+
+        @media (max-width: 750px) {
+
+            main {
+                padding: 12px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .botoes button {
+                flex: 1 1 140px;
+            }
+
+            .legenda {
+                font-size: 22px;
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Agente IHC — Professor</h1>
+
+    <p>
+        IFPR | Grupo 4 |
+        Acessibilidade educacional
+    </p>
+
+</header>
+
+<main>
+
+    <!-- STATUS GERAL -->
+
+    <section class="status-grid">
+
+        <div class="card">
+
+            <small>Estado da aula</small>
+
+            <strong id="estado">
+                Aguardando
+            </strong>
+
+        </div>
+
+        <div class="card">
+
+            <small>Microfone</small>
+
+            <strong id="microfone">
+                Desligado
+            </strong>
+
+        </div>
+
+        <div class="card">
+
+            <small>Alunos conectados</small>
+
+            <strong id="alunos">
+                0
+            </strong>
+
+        </div>
+
+        <div class="card">
+
+            <small>Trechos registrados</small>
+
+            <strong id="total">
+                0
+            </strong>
+
+        </div>
+
+    </section>
+
+    <!-- CONFIGURAÇÃO E CONTROLES -->
+
+    <div class="grid">
+
+        <section class="card">
+
+            <h2>Configuração da aula</h2>
+
+            <label for="titulo">
+                Título
+            </label>
+
+            <input
+                id="titulo"
+                value="Introdução à programação"
+            >
+
+            <label for="professor">
+                Professor
+            </label>
+
+            <input
+                id="professor"
+                value="Professor"
+            >
+
+            <label for="disciplina">
+                Disciplina
+            </label>
+
+            <input
+                id="disciplina"
+                value="Desenvolvimento Web"
+            >
+
+            <label for="vocabulario">
+                Vocabulário técnico
+            </label>
+
+            <select id="vocabulario">
+
+                <option value="geral">
+                    Programação geral
+                </option>
+
+                <option value="desenvolvimento_web">
+                    Desenvolvimento Web
+                </option>
+
+                <option value="banco_de_dados">
+                    Banco de Dados
+                </option>
+
+                <option value="vue">
+                    Vue.js
+                </option>
+
+                <option value="orientacao_objetos">
+                    Orientação a Objetos
+                </option>
+
+                <option value="redes">
+                    Redes de Computadores
+                </option>
+
+                <option value="sistemas_operacionais">
+                    Sistemas Operacionais
+                </option>
+
+                <option value="inteligencia_artificial">
+                    Inteligência Artificial
+                </option>
+
+                <option value="engenharia_software">
+                    Engenharia de Software
+                </option>
+
+                <option value="ihc">
+                    Interação Humano-Computador
+                </option>
+
+            </select>
+
+            <div class="botoes">
+
+                <button
+                    id="salvarConfiguracao"
+                    onclick="configurarAula()"
+                >
+                    Salvar configuração
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- CONTROLES DA AULA -->
+
+        <section class="card">
+
+            <h2>Controles da aula</h2>
+
+            <p class="mensagem">
+                Utilize os botões ou fale os comandos
+                pelo microfone selecionado.
+            </p>
+
+            <div class="botoes">
+
+                <button
+                    id="iniciar"
+                    class="verde"
+                    onclick="comando('iniciar aula')"
+                >
+                    Iniciar aula
+                </button>
+
+                <button
+                    class="roxo"
+                    data-durante
+                    onclick="comando('iniciar atividade')"
+                >
+                    Iniciar atividade
+                </button>
+
+                <button
+                    class="roxo"
+                    data-durante
+                    onclick="comando('iniciar trabalho')"
+                >
+                    Iniciar trabalho
+                </button>
+
+                <button
+                    data-durante
+                    onclick="comando('continuar aula')"
+                >
+                    Continuar aula
+                </button>
+
+                <button
+                    class="amarelo"
+                    data-durante
+                    onclick="comando('isso é importante')"
+                >
+                    Informação importante
+                </button>
+
+                <button
+                    class="vermelho"
+                    data-durante
+                    onclick="comando('finalizar aula')"
+                >
+                    Finalizar aula
+                </button>
+
+            </div>
+
+            <hr>
+
+            <p class="mensagem">
+
+                Fonte selecionada:
+
+                <strong id="modoMicrofone">
+                    Nenhuma
+                </strong>
+
+            </p>
+
+            <p
+                id="mensagemMicrofone"
+                class="mensagem"
+                aria-live="polite"
+            >
+                Aguardando seleção do microfone.
+            </p>
+
+        </section>
+
+    </div>
+
+    <!-- SELEÇÃO DO MICROFONE -->
+
+    <section class="card">
+
+        <h2>Fonte de áudio</h2>
+
+        <p class="mensagem">
+
+            Escolha o microfone que deseja utilizar.
+            Apenas uma fonte pode ficar ativa por vez.
+
+        </p>
+
+        <div class="grid">
+
+            <!-- MICROFONE REMOTO -->
+
+            <div
+                id="fonteRemota"
+                class="fonte"
+            >
+
+                <h3>
+
+                    <span
+                        id="indicadorRemoto"
+                        class="indicador"
+                    ></span>
+
+                    Microfone do celular
+
+                </h3>
+
+                <p class="mensagem">
+
+                    Captura a voz diretamente deste
+                    navegador e transmite ao servidor.
+
+                </p>
+
+                <div class="botoes">
+
+                    <button
+                        id="conectarRemoto"
+                        class="verde"
+                        onclick="iniciarMicrofoneRemoto()"
+                    >
+                        Conectar celular
+                    </button>
+
+                    <button
+                        id="desconectarRemoto"
+                        class="cinza"
+                        onclick="pararMicrofoneRemoto()"
+                    >
+                        Desconectar celular
+                    </button>
+
+                </div>
+
+                <p
+                    id="statusRemoto"
+                    class="mensagem"
+                    aria-live="polite"
+                >
+                    Microfone do celular desligado.
+                </p>
+
+                <label>
+                    Nível de áudio
+                </label>
+
+                <div
+                    class="medidor"
+                    aria-hidden="true"
+                >
+
+                    <div id="nivelAudio"></div>
+
+                </div>
+
+                <p class="mensagem">
+                    Mantenha a página aberta durante
+                    a transmissão.
+                </p>
+
+            </div>
+
+            <!-- MICROFONE FÍSICO -->
+
+            <div
+                id="fonteLocal"
+                class="fonte"
+            >
+
+                <h3>
+
+                    <span
+                        id="indicadorLocal"
+                        class="indicador"
+                    ></span>
+
+                    Microfone físico
+
+                </h3>
+
+                <p class="mensagem">
+
+                    Utiliza o microfone de lapela,
+                    USB ou outro dispositivo conectado
+                    ao computador ou TV Box.
+
+                </p>
+
+                <div class="botoes">
+
+                    <button
+                        id="iniciarLocal"
+                        class="verde"
+                        onclick="controlarMicrofoneLocal('iniciar')"
+                    >
+                        Ativar microfone físico
+                    </button>
+
+                    <button
+                        id="pararLocal"
+                        class="cinza"
+                        onclick="controlarMicrofoneLocal('parar')"
+                    >
+                        Desativar microfone físico
+                    </button>
+
+                </div>
+
+                <p
+                    id="statusLocal"
+                    class="mensagem"
+                >
+                    Microfone físico desligado.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- TELEMETRIA DO ÁUDIO REMOTO -->
+
+        <h3>Diagnóstico do áudio remoto</h3>
+
+        <div class="telemetria">
+
+            <div>
+
+                Blocos recebidos:
+
+                <strong id="blocos">
+                    0
+                </strong>
+
+            </div>
+
+            <div>
+
+                Dados recebidos:
+
+                <strong id="bytes">
+                    0 KB
+                </strong>
+
+            </div>
+
+            <div>
+
+                Fila:
+
+                <strong id="fila">
+                    0
+                </strong>
+
+            </div>
+
+            <div>
+
+                Transcrições:
+
+                <strong id="transcricoes">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LEGENDA -->
+
+    <section class="card">
+
+        <h2>Legenda atual</h2>
+
+        <div class="legenda">
+
+            <div
+                id="legenda"
+                aria-live="polite"
+            >
+                Aguardando início da aula...
+            </div>
+
+            <div
+                id="parcial"
+                class="parcial"
+            ></div>
+
+        </div>
+
+        <p class="mensagem">
+
+            Vosk produz os resultados parciais.
+            Whisper produz as legendas definitivas.
+
+        </p>
+
+        <h2>Histórico da transcrição</h2>
+
+        <div
+            id="historico"
+            class="historico"
+        ></div>
+
+    </section>
+
+    <div class="grid">
+
+        <!-- TEXTO MANUAL -->
+
+        <section class="card">
+
+            <h2>Legenda manual</h2>
+
+            <label for="textoManual">
+                Digite uma informação
+                para os alunos.
+            </label>
+
+            <textarea
+                id="textoManual"
+                placeholder="Escreva uma legenda..."
+            ></textarea>
+
+            <div class="botoes">
+
+                <button
+                    data-durante
+                    onclick="enviarTexto()"
+                >
+                    Enviar legenda
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- PROCESSAMENTO FINAL -->
+
+        <section class="card">
+
+            <h2>Material da aula</h2>
+
+            <div
+                id="processamento"
+                aria-live="polite"
+            >
+
+                Aguardando finalização da aula.
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- FEEDBACK -->
+
+    <div
+        id="feedback"
+        class="feedback"
+        role="status"
+    >
+        Conectando ao servidor...
+    </div>
+
+</main>
+
+<footer>
+
+    Agente de Acessibilidade Educacional
+
+</footer>
+
+<script src="/professor.js"></script>
+
+<script src="/microfone-remoto.js"></script>
+
+</body>
+
+</html>
