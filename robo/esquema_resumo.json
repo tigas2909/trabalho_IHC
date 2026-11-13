@@ -1,0 +1,1563 @@
+{
+    "type": "object",
+    "properties": {
+        "versao_esquema": {
+            "const": "1.0"
+        },
+        "identificacao": {
+            "type": "object",
+            "properties": {
+                "aula_id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "disciplina": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "professor": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "data": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date"
+                },
+                "inicio": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date-time"
+                },
+                "fim": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date-time"
+                },
+                "duracao_segundos": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "idioma": {
+                    "const": "pt-BR"
+                }
+            },
+            "required": [
+                "aula_id",
+                "titulo",
+                "disciplina",
+                "professor",
+                "data",
+                "inicio",
+                "fim",
+                "duracao_segundos",
+                "idioma"
+            ],
+            "additionalProperties": false
+        },
+        "resumo": {
+            "type": "object",
+            "properties": {
+                "resumo_geral": {
+                    "type": "string"
+                },
+                "objetivos_da_aula": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "assuntos_principais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "palavras_chave": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "nivel_de_dificuldade": {
+                    "enum": [
+                        "basico",
+                        "intermediario",
+                        "avancado",
+                        null
+                    ]
+                }
+            },
+            "required": [
+                "resumo_geral",
+                "objetivos_da_aula",
+                "assuntos_principais",
+                "palavras_chave",
+                "nivel_de_dificuldade"
+            ],
+            "additionalProperties": false
+        },
+        "conteudo": {
+            "type": "object",
+            "properties": {
+                "topicos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/topico"
+                    }
+                },
+                "conceitos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/conceito"
+                    }
+                },
+                "exemplos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/exemplo"
+                    }
+                },
+                "formulas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/formula"
+                    }
+                },
+                "codigos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/codigo"
+                    }
+                },
+                "procedimentos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/procedimento"
+                    }
+                }
+            },
+            "required": [
+                "topicos",
+                "conceitos",
+                "exemplos",
+                "formulas",
+                "codigos",
+                "procedimentos"
+            ],
+            "additionalProperties": false
+        },
+        "atividades": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/atividade"
+            }
+        },
+        "trabalhos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/trabalho"
+            }
+        },
+        "avaliacoes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/avaliacao"
+            }
+        },
+        "prazos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/prazo_geral"
+            }
+        },
+        "materiais_complementares": {
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/material"
+            }
+        },
+        "revisao": {
+            "type": "object",
+            "properties": {
+                "pontos_principais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "conceitos_fundamentais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "perguntas_e_respostas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/pergunta"
+                    }
+                },
+                "exercicios_de_fixacao": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/exercicio"
+                    }
+                },
+                "flashcards": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/flashcard"
+                    }
+                },
+                "sugestao_de_estudo": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "pontos_principais",
+                "conceitos_fundamentais",
+                "perguntas_e_respostas",
+                "exercicios_de_fixacao",
+                "flashcards",
+                "sugestao_de_estudo"
+            ],
+            "additionalProperties": false
+        },
+        "acessibilidade": {
+            "type": "object",
+            "properties": {
+                "termos_tecnicos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/termo_tecnico"
+                    }
+                },
+                "referencias_visuais": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/referencia_visual"
+                    }
+                },
+                "trechos_incompletos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/trecho_incompleto"
+                    }
+                },
+                "adaptacoes_textuais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "informacoes_que_precisam_de_confirmacao": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "termos_tecnicos",
+                "referencias_visuais",
+                "trechos_incompletos",
+                "adaptacoes_textuais",
+                "informacoes_que_precisam_de_confirmacao"
+            ],
+            "additionalProperties": false
+        },
+        "observacoes": {
+            "type": "object",
+            "properties": {
+                "avisos_do_professor": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "informacoes_adicionais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contradicoes_identificadas": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "limitacoes_da_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "informacoes_nao_confirmadas": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "avisos_do_professor",
+                "informacoes_adicionais",
+                "contradicoes_identificadas",
+                "limitacoes_da_transcricao",
+                "informacoes_nao_confirmadas"
+            ],
+            "additionalProperties": false
+        },
+        "qualidade_do_processamento": {
+            "type": "object",
+            "properties": {
+                "conteudo_suficiente": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "total_registros_analisados": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "minimum": 0
+                },
+                "total_registros_utilizados": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "minimum": 0
+                },
+                "registros_incompletos": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                },
+                "campos_sem_informacao": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "necessita_revisao_humana": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "motivos_para_revisao": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "conteudo_suficiente",
+                "total_registros_analisados",
+                "total_registros_utilizados",
+                "registros_incompletos",
+                "campos_sem_informacao",
+                "necessita_revisao_humana",
+                "motivos_para_revisao"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "versao_esquema",
+        "identificacao",
+        "resumo",
+        "conteudo",
+        "atividades",
+        "trabalhos",
+        "avaliacoes",
+        "prazos",
+        "materiais_complementares",
+        "revisao",
+        "acessibilidade",
+        "observacoes",
+        "qualidade_do_processamento"
+    ],
+    "additionalProperties": false,
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Resumo de Aula - Agente IHC",
+    "description": "Esquema de validação dos materiais de estudo gerados pela inteligência artificial.",
+    "$defs": {
+        "prazo": {
+            "type": "object",
+            "properties": {
+                "informado": {
+                    "type": "boolean"
+                },
+                "descricao_original": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "data": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date"
+                },
+                "horario": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+                }
+            },
+            "required": [
+                "informado",
+                "descricao_original",
+                "data",
+                "horario"
+            ],
+            "additionalProperties": false
+        },
+        "topico": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "explicacao": {
+                    "type": "string"
+                },
+                "subtopicos": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "importancia": {
+                    "enum": [
+                        "baixa",
+                        "media",
+                        "alta",
+                        null
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "descricao",
+                "explicacao",
+                "subtopicos",
+                "importancia",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "conceito": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "definicao": {
+                    "type": "string"
+                },
+                "explicacao": {
+                    "type": "string"
+                },
+                "exemplo": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aplicacao_pratica": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "nome",
+                "definicao",
+                "explicacao",
+                "exemplo",
+                "aplicacao_pratica",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "exemplo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "demonstracao": {
+                    "type": "string"
+                },
+                "resultado": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "descricao",
+                "demonstracao",
+                "resultado",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "variavel": {
+            "type": "object",
+            "properties": {
+                "simbolo": {
+                    "type": "string"
+                },
+                "significado": {
+                    "type": "string"
+                },
+                "unidade": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "simbolo",
+                "significado",
+                "unidade"
+            ],
+            "additionalProperties": false
+        },
+        "formula": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "expressao": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "variaveis": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/variavel"
+                    }
+                },
+                "exemplo_de_aplicacao": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "nome",
+                "expressao",
+                "descricao",
+                "variaveis",
+                "exemplo_de_aplicacao",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "codigo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "linguagem": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "codigo": {
+                    "type": "string"
+                },
+                "explicacao": {
+                    "type": "string"
+                },
+                "resultado_esperado": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "completo": {
+                    "type": "boolean"
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "linguagem",
+                "codigo",
+                "explicacao",
+                "resultado_esperado",
+                "completo",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "etapa_procedimento": {
+            "type": "object",
+            "properties": {
+                "ordem": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "instrucao": {
+                    "type": "string"
+                },
+                "observacao": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "ordem",
+                "instrucao",
+                "observacao"
+            ],
+            "additionalProperties": false
+        },
+        "procedimento": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "objetivo": {
+                    "type": "string"
+                },
+                "etapas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/etapa_procedimento"
+                    }
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "objetivo",
+                "etapas",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "atividade": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "objetivo": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instrucoes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "requisitos": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "materiais_necessarios": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tipo": {
+                    "enum": [
+                        "pratica",
+                        "teorica",
+                        "pesquisa",
+                        "exercicio",
+                        "outro",
+                        null
+                    ]
+                },
+                "modalidade": {
+                    "enum": [
+                        "individual",
+                        "dupla",
+                        "grupo",
+                        null
+                    ]
+                },
+                "prazo": {
+                    "$ref": "#/$defs/prazo"
+                },
+                "entrega": {
+                    "type": "object",
+                    "properties": {
+                        "necessaria": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "formato": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "plataforma": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "orientacoes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "necessaria",
+                        "formato",
+                        "plataforma",
+                        "orientacoes"
+                    ],
+                    "additionalProperties": false
+                },
+                "avaliacao": {
+                    "type": "object",
+                    "properties": {
+                        "avaliativa": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "valor": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "minimum": 0
+                        },
+                        "criterios": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "avaliativa",
+                        "valor",
+                        "criterios"
+                    ],
+                    "additionalProperties": false
+                },
+                "observacoes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "descricao",
+                "objetivo",
+                "instrucoes",
+                "requisitos",
+                "materiais_necessarios",
+                "tipo",
+                "modalidade",
+                "prazo",
+                "entrega",
+                "avaliacao",
+                "observacoes",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "etapa_trabalho": {
+            "type": "object",
+            "properties": {
+                "ordem": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "prazo": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date"
+                }
+            },
+            "required": [
+                "ordem",
+                "titulo",
+                "descricao",
+                "prazo"
+            ],
+            "additionalProperties": false
+        },
+        "trabalho": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "objetivo": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instrucoes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "requisitos_funcionais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "requisitos_nao_funcionais": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "materiais_necessarios": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "modalidade": {
+                    "enum": [
+                        "individual",
+                        "dupla",
+                        "grupo",
+                        null
+                    ]
+                },
+                "quantidade_integrantes": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "minimum": 1
+                },
+                "etapas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/etapa_trabalho"
+                    }
+                },
+                "prazo": {
+                    "$ref": "#/$defs/prazo"
+                },
+                "entrega": {
+                    "type": "object",
+                    "properties": {
+                        "formato": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "plataforma": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "arquivos_necessarios": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "orientacoes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "formato",
+                        "plataforma",
+                        "arquivos_necessarios",
+                        "orientacoes"
+                    ],
+                    "additionalProperties": false
+                },
+                "avaliacao": {
+                    "type": "object",
+                    "properties": {
+                        "valor": {
+                            "type": [
+                                "number",
+                                "null"
+                            ],
+                            "minimum": 0
+                        },
+                        "criterios": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "apresentacao_obrigatoria": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "valor",
+                        "criterios",
+                        "apresentacao_obrigatoria"
+                    ],
+                    "additionalProperties": false
+                },
+                "observacoes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "descricao",
+                "objetivo",
+                "instrucoes",
+                "requisitos_funcionais",
+                "requisitos_nao_funcionais",
+                "materiais_necessarios",
+                "modalidade",
+                "quantidade_integrantes",
+                "etapas",
+                "prazo",
+                "entrega",
+                "avaliacao",
+                "observacoes",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "avaliacao": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "enum": [
+                        "prova",
+                        "seminario",
+                        "trabalho",
+                        "atividade",
+                        "projeto",
+                        "outro",
+                        null
+                    ]
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "conteudos_cobrados": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "data": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date"
+                },
+                "horario": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+                },
+                "valor": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "minimum": 0
+                },
+                "criterios": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "orientacoes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "tipo",
+                "descricao",
+                "conteudos_cobrados",
+                "data",
+                "horario",
+                "valor",
+                "criterios",
+                "orientacoes",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "prazo_geral": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "enum": [
+                        "atividade",
+                        "trabalho",
+                        "avaliacao",
+                        "outro"
+                    ]
+                },
+                "referencia_id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "descricao_original": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "date"
+                },
+                "horario": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+                },
+                "confirmado": {
+                    "type": "boolean"
+                },
+                "observacoes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "tipo",
+                "referencia_id",
+                "descricao_original",
+                "data",
+                "horario",
+                "confirmado",
+                "observacoes"
+            ],
+            "additionalProperties": false
+        },
+        "material": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "enum": [
+                        "livro",
+                        "artigo",
+                        "video",
+                        "site",
+                        "documento",
+                        "codigo",
+                        "outro"
+                    ]
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "obrigatorio": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "tipo",
+                "descricao",
+                "url",
+                "obrigatorio",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "pergunta": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "pergunta": {
+                    "type": "string"
+                },
+                "resposta": {
+                    "type": "string"
+                },
+                "explicacao": {
+                    "type": "string"
+                },
+                "dificuldade": {
+                    "enum": [
+                        "basico",
+                        "intermediario",
+                        "avancado",
+                        null
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "pergunta",
+                "resposta",
+                "explicacao",
+                "dificuldade",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "exercicio": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "titulo": {
+                    "type": "string"
+                },
+                "enunciado": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "enum": [
+                        "objetiva",
+                        "discursiva",
+                        "verdadeiro_falso",
+                        "pratica"
+                    ]
+                },
+                "alternativas": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "resposta": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "explicacao": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "gerado_pela_ia": {
+                    "const": true
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "id",
+                "titulo",
+                "enunciado",
+                "tipo",
+                "alternativas",
+                "resposta",
+                "explicacao",
+                "gerado_pela_ia",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "flashcard": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "frente": {
+                    "type": "string"
+                },
+                "verso": {
+                    "type": "string"
+                },
+                "categoria": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "frente",
+                "verso",
+                "categoria"
+            ],
+            "additionalProperties": false
+        },
+        "termo_tecnico": {
+            "type": "object",
+            "properties": {
+                "termo": {
+                    "type": "string"
+                },
+                "significado": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "termo",
+                "significado",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "referencia_visual": {
+            "type": "object",
+            "properties": {
+                "descricao": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "enum": [
+                        "imagem",
+                        "slide",
+                        "quadro",
+                        "video",
+                        "demonstracao",
+                        "outro"
+                    ]
+                },
+                "conteudo_disponivel": {
+                    "type": "boolean"
+                },
+                "informacao_ausente": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "descricao",
+                "tipo",
+                "conteudo_disponivel",
+                "informacao_ausente",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        },
+        "trecho_incompleto": {
+            "type": "object",
+            "properties": {
+                "texto": {
+                    "type": "string"
+                },
+                "motivo": {
+                    "type": "string"
+                },
+                "necessita_confirmacao": {
+                    "type": "boolean"
+                },
+                "referencias_transcricao": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "texto",
+                "motivo",
+                "necessita_confirmacao",
+                "referencias_transcricao"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

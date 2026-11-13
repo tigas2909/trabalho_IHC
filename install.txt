@@ -1,0 +1,35 @@
+# ==========================================
+# Agente de IA - Acessibilidade Educacional
+# Projeto IHC - Grupo 4
+# ==========================================
+
+# Servidor web
+fastapi
+uvicorn[standard]
+websockets
+jinja2
+
+# Processamento de audio
+numpy
+sounddevice
+
+# Reconhecimento de voz
+vosk
+onnx-asr[cpu,hub]
+faster-whisper
+av<19
+onnxruntime
+
+# Inteligencia Artificial
+httpx
+ollama
+google-genai
+
+# Configuracoes e variaveis de ambiente
+python-dotenv
+
+# Geracao de PDF
+reportlab
+
+# Validação de respostas da IA
+jsonschema

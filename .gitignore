@@ -1,0 +1,17 @@
+.env
+chave_web.txt
+.venv/
+__pycache__/
+*.pyc
+
+dados/transcricoes/*
+dados/relatorios/*
+dados/resumos/*
+dados/pendencias/*
+
+!dados/transcricoes/.gitkeep
+!dados/relatorios/.gitkeep
+!dados/resumos/.gitkeep
+!dados/pendencias/.gitkeep
+
+modelos/
