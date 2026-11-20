@@ -1,40 +1,28 @@
-# ==========================================
-# Agente de IA - Acessibilidade Educacional
-# Projeto IHC - Grupo 4
-# ==========================================
-
-# Servidor web
+# API
 fastapi
 uvicorn[standard]
-websockets
-jinja2
 
-# Processamento de audio
-numpy
-sounddevice
+# Documentação OpenAPI
+pydantic
+
+# Google Gemini
+google-genai
 
 # Reconhecimento de voz
 vosk
-onnx-asr[cpu,hub]
-faster-whisper
-av<19
-onnxruntime
+openai-whisper
 
-# Inteligencia Artificial
-httpx
-ollama
-google-genai
-
-# Configuracoes e variaveis de ambiente
-python-dotenv
-
-# Geracao de PDF
-reportlab
-
-# Validação de respostas da IA
-jsonschema
-
+# Áudio
 sounddevice
+soundfile
 numpy
-fastapi
-uvicorn[standard]
+
+# Processamento de texto
+rapidfuzz
+
+# HTTP
+requests
+httpx
+
+#lib gerais
+smtplib
